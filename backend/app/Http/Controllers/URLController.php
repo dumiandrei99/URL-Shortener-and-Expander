@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ShortenedURL;
 use Illuminate\Http\Request;
 
-class ShortenedURLController extends Controller
+class URLController extends Controller
 {
     /**
      * Converts an expanded URL to a shortened URL.
