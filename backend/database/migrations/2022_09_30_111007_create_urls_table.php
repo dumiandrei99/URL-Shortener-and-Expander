@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
 
-        Schema::create('urls', function (Blueprint $table) {
+        Schema::create('u_r_l_s', function (Blueprint $table) {
             $table->id();
             $table->string('expanded_url');
             $table->string('slug');
