@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shortened_u_r_l_s', function (Blueprint $table) {
+        Schema::create('shortened_urls', function (Blueprint $table) {
             $table->id();
+            $table->string('expanded_url');
+            $table->string('shortened_url');
+            $table->integer('times_clicked');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shortened_u_r_l_s');
+        Schema::dropIfExists('shortened_urls');
     }
 };
