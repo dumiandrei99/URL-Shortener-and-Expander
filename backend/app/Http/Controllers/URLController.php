@@ -49,6 +49,40 @@ class URLController extends Controller
     }
 
     /**
+     * Converts a slug to an expanded URL.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function expand(Request $request)
+    {
+        // validate the request
+        $request->validate([
+            'slug' => 'required'
+        ]);
+
+        // extract the request parameters
+        $slug = $request->slug;
+
+        // check if the slug is already defined and saved in the DB
+        if (!URL::where('slug', $slug)->exists()) {
+            // status code 400 - Bad Request
+            return response(["errors" => ["slug" => "This slug does not exist!"]], 400);
+        };
+
+        // get the object with the slug from the input from the DB
+        $url_object = URL::where('slug', $slug)->first();
+
+        // success response has a success message and the host/slug URL that is sent to the frontend
+        $response = ["success" => [
+            "message" => "URL has been expanded with success!",
+            "url" => $url_object->expanded_url
+        ]];
+
+        return response($response, 200);
+    }
+
+    /**
      * Redirects the host + slug to the expanded url saved in the DB
      *
      * @param  String  $slug
