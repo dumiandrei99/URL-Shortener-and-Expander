@@ -40,11 +40,35 @@ class URLController extends Controller
 
         // success response has a success message and the host/slug URL that is sent to the frontend
         $host = url('/');
-        $url_response = $host . "/" . $slug;
+        $url_response = $host . "/api/" . $slug;
         $response = ["success" => [
             "message" => "Shortened URL has been created with success!",
             "url" => $url_response
         ]];
         return response($response, 200);
+    }
+
+    /**
+     * Redirects the host + slug to the expanded url saved in the DB
+     *
+     * @param  String  $slug
+     * @return redirect
+     */
+
+    public function handle_redirect(Request $request)
+    {
+        $slug = $request->slug;
+        $url_object = URL::where('slug', $slug)->first();
+
+        if (URL::where('slug', $slug)->exists()) {
+            // update times clicked
+            $url_object->times_clicked += 1;
+            $url_object->save();
+            // redirect to the expanded url
+            return redirect($url_object->expanded_url);
+        } else {
+            // if the slug does not exist in the DB, return a 404 response
+            return abort(404);
+        }
     }
 }
