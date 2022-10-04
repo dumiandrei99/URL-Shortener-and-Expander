@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import PageSelector from './components/PageSelector';
+import Shortener from './components/Shortener';
 
 function App() {
   const [shortenerPressed, setShortenerPressed] = useState(true)
@@ -39,17 +40,11 @@ function App() {
       </div>
 
       <div className="main-div">
-        {shortenerPressed &&
-          <div> Shortener </div>
-        }
+        {shortenerPressed && <Shortener />}
 
-        {expanderPressed && 
-          <div> Expander </div>
-        }
+        {expanderPressed && <div> Expander </div>}
 
-        {analyticsPressed &&
-          <div> Analytics </div>
-        }
+        {analyticsPressed && <div> Analytics </div>}
       </div>
     </div>
   );

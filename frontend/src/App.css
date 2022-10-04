@@ -37,4 +37,84 @@ button.page-selector-button-not-pressed:hover {
 div.main-div { 
     width: 100vw;
     height: 93vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* Input styling */
+div.input-wrapper {
+    display: block;
+}
+
+input {
+    display: block;
+    width: 60vw;
+    height: 5vh;
+    margin-top: 10vh;
+    outline: none;
+    border: 2px solid black;
+    text-align: center;
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+/* Shortener and Expander Styling */
+
+button.shortener-or-expander {
+    width: 60.5vw;
+    height: 5vh;
+    color: white;
+    background-color: #696969;
+    border-color: transparent;
+}
+
+button.shortener-or-expander:hover {
+    background-color: #606060;
+}
+
+div.button-shortener-or-expander-wrapper {
+    margin-top: 5vw;
+}
+
+div.input-error {
+    background-color: #FF9494;
+    width: 60.5vw;
+    height: 2.5vh;
+    color: white;
+    text-align: center;
+}
+
+div.success {
+    background-color: #9CE85E;
+    width: 60.5vw;
+    height: 2.5vh;
+    color: white;
+    text-align: center;
+}
+
+div.shortened-or-expanded-url {
+    font-size: 22px;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+div.copied-to-clipboard {
+    display: inline;
+    margin-left: 25vw;
+}
+
+button.copy-to-clipboard {
+    margin-left: 25vw;
+    font-size: 18px;
+    text-decoration: underline;
+    color: black;
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
 }

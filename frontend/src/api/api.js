@@ -3,16 +3,34 @@ import axios from 'axios'
 const HOST = url.getHost()
 
 
-const shortenURL = (url, callback) => {
+const shortenURL = (slugAndURL, setUrlError, setShowUrlError, setSlugError, setShowSlugError, setSuccessMessage, setShowSuccessMessage, setShowShortenedURL, setShortenedURL, callback) => {
     axios({
         method: "post",
-        url: HOST + '/shorten-url',
-        data: url,
+        url: HOST + '/api/shorten-url',
+        data: slugAndURL,
         headers: { "Content-Type": "application/json" },
       })
     .then(callback)
-    .catch(function (response) {
-        console.log(response);
+    .catch(function (error) {
+        if (error.response.data.errors.slug) {
+            setShowSlugError(true)
+            setSlugError(error.response.data.errors.slug)
+        } else {
+            setShowSlugError(false)
+            setSlugError('')
+        }
+        if (error.response.data.errors.expanded_url) {
+            setShowUrlError(true)
+            setUrlError(error.response.data.errors.expanded_url)
+        } else {
+            setShowUrlError(false)
+            setUrlError('')
+        }
+
+        setSuccessMessage('')
+        setShowSuccessMessage(false)
+        setShortenedURL('')
+        setShowShortenedURL(false)
     });
 }
 
