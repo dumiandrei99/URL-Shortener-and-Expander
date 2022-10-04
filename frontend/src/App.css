@@ -1,0 +1,40 @@
+/* Page selector styling */
+div.page-selector-wrapper {
+    width: 100vw;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+div.page-selector {
+    width: 60vw;
+    height: 5vh;
+    border:2px solid black;
+    border-radius: 5px;
+}
+
+button.page-selector-button-pressed {
+    width: 20vw;
+    height: 5vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+button.page-selector-button-not-pressed {
+    width: 20vw;
+    height: 5vh;
+    color: black;
+    background-color: transparent;
+    text-align: center;
+}
+
+button.page-selector-button-not-pressed:hover {
+    background-color: #E8E8E8;
+}
+
+/* Main div that wrapps the whole page under the selector*/
+div.main-div { 
+    width: 100vw;
+    height: 93vh;
+}
