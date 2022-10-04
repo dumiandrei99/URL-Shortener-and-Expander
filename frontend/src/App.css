@@ -95,8 +95,9 @@ div.success {
 }
 
 div.shortened-or-expanded-url {
-    font-size: 22px;
     margin-top: 5vh;
+    width: 100%;
+    font-size: 18px;
     text-align: center;
 }
 

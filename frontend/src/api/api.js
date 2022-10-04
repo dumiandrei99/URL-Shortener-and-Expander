@@ -19,6 +19,7 @@ const shortenURL = (slugAndURL, setUrlError, setShowUrlError, setSlugError, setS
             setShowSlugError(false)
             setSlugError('')
         }
+
         if (error.response.data.errors.expanded_url) {
             setShowUrlError(true)
             setUrlError(error.response.data.errors.expanded_url)
@@ -34,16 +35,27 @@ const shortenURL = (slugAndURL, setUrlError, setShowUrlError, setSlugError, setS
     });
 }
 
-const expandURL = (url, callback) => {
+const expandURL = (url, setSlugError, setShowSlugError, setSuccessMessage, setShowSuccessMessage, setShowExpandedURL, setExpandedURL, callback) => {
     axios({
         method: "post",
-        url: HOST + '/expand-url',
+        url: HOST + '/api/expand-url',
         data: url,
         headers: { "Content-Type": "application/json" },
       })
     .then(callback)
-    .catch(function (response) {
-        console.log(response);
+    .catch(function (error) {
+        if (error.response.data.errors.slug) {
+            setShowSlugError(true)
+            setSlugError(error.response.data.errors.slug)
+        } else {
+            setShowSlugError(false)
+            setSlugError('')
+        }
+
+        setSuccessMessage('')
+        setShowSuccessMessage(false)
+        setExpandedURL('')
+        setShowExpandedURL(false)
     });
 }
 

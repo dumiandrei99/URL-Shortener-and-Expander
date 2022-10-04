@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import PageSelector from './components/PageSelector';
 import Shortener from './components/Shortener';
+import Expander from './components/Expander';
 
 function App() {
   const [shortenerPressed, setShortenerPressed] = useState(true)
@@ -42,7 +43,7 @@ function App() {
       <div className="main-div">
         {shortenerPressed && <Shortener />}
 
-        {expanderPressed && <div> Expander </div>}
+        {expanderPressed && <Expander />}
 
         {analyticsPressed && <div> Analytics </div>}
       </div>
