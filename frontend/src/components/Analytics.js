@@ -18,7 +18,7 @@ function Analytics() {
                 <div className= "header"> TIMES CLICKED </div>
             </div>
             {analytics.length === 0 ?
-                <div> No data available yet... </div>
+                <div className='no-data-available'> No data available yet... </div>
                 :
                 analytics.map((analytic, index) => {
                     return(

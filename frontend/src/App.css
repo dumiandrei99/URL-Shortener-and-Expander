@@ -126,6 +126,12 @@ div.headers {
     height: 5vh;
 }
 
+div.no-data-available{
+    width: 60vw;
+    text-align: center;
+    margin-top: 25vh;
+}
+
 div.header {
     float: left;
     width: 50%;
