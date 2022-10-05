@@ -3,6 +3,7 @@ import './App.css';
 import PageSelector from './components/PageSelector';
 import Shortener from './components/Shortener';
 import Expander from './components/Expander';
+import Analytics from './components/Analytics';
 
 function App() {
   const [shortenerPressed, setShortenerPressed] = useState(true)
@@ -45,7 +46,7 @@ function App() {
 
         {expanderPressed && <Expander />}
 
-        {analyticsPressed && <div> Analytics </div>}
+        {analyticsPressed && <Analytics />}
       </div>
     </div>
   );

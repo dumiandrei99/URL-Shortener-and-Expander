@@ -59,7 +59,19 @@ const expandURL = (url, setSlugError, setShowSlugError, setSuccessMessage, setSh
     });
 }
 
+const analytics = (callback) => {
+    axios({
+        method: "get",
+        url: HOST + '/api/analytics',
+    })
+    .then(callback)
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
 export {
     shortenURL,
-    expandURL
+    expandURL,
+    analytics
 }

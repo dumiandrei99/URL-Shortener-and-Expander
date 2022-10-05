@@ -119,3 +119,36 @@ button.copy-to-clipboard {
     border-color: transparent;
     cursor: pointer;
 }
+
+/* Analytics styling */
+div.headers {
+    width: 60vw;
+    height: 5vh;
+}
+
+div.header {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    margin-top: 5vh;
+    font-size: 22px;
+}
+
+div.times-clicked {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    margin-top: 5vh;
+    font-size: 18px;
+}
+
+a.slug {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    margin-top: 5vh;
+    font-size: 18px;
+}
