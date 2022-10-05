@@ -83,12 +83,29 @@ class URLController extends Controller
     }
 
     /**
+     * Returns all the slugs sorted by times_clicked in a descending order
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function analytics(Request $request)
+    {
+        $host = url('/');
+        $slug_and_clicks = URL::select('slug', 'times_clicked')->orderBy('times_clicked', 'DESC')->get();
+
+        foreach ($slug_and_clicks as $slug_and_click) {
+            $slug_and_click['slug'] = $host . '/api/' . $slug_and_click['slug'];
+        }
+
+        return response($slug_and_clicks, 200);
+    }
+
+    /**
      * Redirects the host + slug to the expanded url saved in the DB
      *
      * @param  String  $slug
      * @return redirect
      */
-
     public function handle_redirect(Request $request)
     {
         $slug = $request->slug;
