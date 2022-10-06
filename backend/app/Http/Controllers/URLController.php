@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\URL;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class URLController extends Controller
 {
@@ -18,18 +19,12 @@ class URLController extends Controller
         // validate the request
         $request->validate([
             'expanded_url' => 'required|url',
-            'slug' => 'required'
         ]);
 
         // extract the request parameters
         $expanded_url = $request->expanded_url;
-        $slug = $request->slug;
-
-        // check if the slug is already defined and saved in the DB
-        if (URL::where('slug', $slug)->exists()) {
-            // status code 400 - Bad Request
-            return response(["errors" => ["slug" => "This slug is already used!"]], 400);
-        };
+        // creates a random, 7 character slug, which is unique
+        $slug = Str::random(7);
 
         // save the expanded url and it's slug to the DB, with the "times_clicked" value set to 0
         $url_object = new URL();
