@@ -104,9 +104,9 @@ class URLController extends Controller
     public function handle_redirect(Request $request)
     {
         $slug = $request->slug;
-        $url_object = URL::where('slug', $slug)->first();
+        $url_object = URL::whereRaw("BINARY `slug`= ?", [$slug])->first();
 
-        if (URL::where('slug', $slug)->exists()) {
+        if (URL::whereRaw("BINARY `slug`= ?", [$slug])->exists()) {
             // update times clicked
             $url_object->times_clicked += 1;
             $url_object->save();
