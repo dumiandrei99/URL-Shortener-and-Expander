@@ -3,22 +3,15 @@ import axios from 'axios'
 const HOST = url.getHost()
 
 
-const shortenURL = (slugAndURL, setUrlError, setShowUrlError, setSlugError, setShowSlugError, setSuccessMessage, setShowSuccessMessage, setShowShortenedURL, setShortenedURL, callback) => {
+const shortenURL = (url, setUrlError, setShowUrlError, setSuccessMessage, setShowSuccessMessage, setShowShortenedURL, setShortenedURL, callback) => {
     axios({
         method: "post",
         url: HOST + '/api/shorten-url',
-        data: slugAndURL,
+        data: url,
         headers: { "Content-Type": "application/json" },
       })
     .then(callback)
     .catch(function (error) {
-        if (error.response.data.errors.slug) {
-            setShowSlugError(true)
-            setSlugError(error.response.data.errors.slug)
-        } else {
-            setShowSlugError(false)
-            setSlugError('')
-        }
 
         if (error.response.data.errors.expanded_url) {
             setShowUrlError(true)
@@ -35,11 +28,11 @@ const shortenURL = (slugAndURL, setUrlError, setShowUrlError, setSlugError, setS
     });
 }
 
-const expandURL = (url, setSlugError, setShowSlugError, setSuccessMessage, setShowSuccessMessage, setShowExpandedURL, setExpandedURL, callback) => {
+const expandURL = (slug, setSlugError, setShowSlugError, setSuccessMessage, setShowSuccessMessage, setShowExpandedURL, setExpandedURL, callback) => {
     axios({
         method: "post",
         url: HOST + '/api/expand-url',
-        data: url,
+        data: slug,
         headers: { "Content-Type": "application/json" },
       })
     .then(callback)
