@@ -99,13 +99,13 @@ class URLController extends Controller
         // check if the old slug exists in the DB and if not, return an error message
         if (!URL::whereRaw("BINARY `slug`= ?", [$old_slug])->exists()) {
             // status code 400 - Bad Request
-            return response(["errors" => ["slug" => "This slug does not exist!"]], 400);
+            return response(["errors" => ["old_slug" => "This slug does not exist!"]], 400);
         };
 
         // check if the new slug is already used by someone else
         if (URL::whereRaw("BINARY `slug`= ?", [$new_slug])->exists()) {
             // status code 400 - Bad Request
-            return response(["errors" => ["slug" => "This customized slug is already in use!"]], 400);
+            return response(["errors" => ["new_slug" => "This customized slug is already in use!"]], 400);
         }
 
         // save the new slug in the DB
