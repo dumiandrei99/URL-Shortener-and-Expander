@@ -6,6 +6,7 @@ function PageSelector(props) {
     <div>
         <PageSelectorButton pressed={props.shortenerPressed} buttonName="Shortener" onPress={props.shortenerOnPress}/>
         <PageSelectorButton pressed={props.expanderPressed} buttonName="Expander" onPress={props.expanderOnPress}/>
+        <PageSelectorButton pressed={props.customizerPressed} buttonName="Customizer" onPress={props.customizerOnPress} />
         <PageSelectorButton pressed={props.analyticsPressed} buttonName="Analytics" onPress={props.analyticsOnPress}/>
     </div>
   );

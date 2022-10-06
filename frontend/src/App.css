@@ -14,7 +14,7 @@ div.page-selector {
 }
 
 button.page-selector-button-pressed {
-    width: 20vw;
+    width: 15vw;
     height: 5vh;
     background-color: black;
     color: white;
@@ -22,7 +22,7 @@ button.page-selector-button-pressed {
 }
 
 button.page-selector-button-not-pressed {
-    width: 20vw;
+    width: 15vw;
     height: 5vh;
     color: black;
     background-color: transparent;

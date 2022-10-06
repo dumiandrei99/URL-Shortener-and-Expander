@@ -52,6 +52,40 @@ const expandURL = (slug, setSlugError, setShowSlugError, setSuccessMessage, setS
     });
 }
 
+const customizeURL = (oldAndNewSlug, setOldSlugError, setShowOldSlugError, setNewSlugError, setShowNewSlugError, setSuccessMessage, setShowSuccessMessage, setShowShortenedURL, setShortenedURL, callback) => {
+    axios({
+        method: "post",
+        url: HOST + '/api/customize-slug',
+        data: oldAndNewSlug,
+        headers: { "Content-Type": "application/json" },
+      })
+    .then(callback)
+    .catch(function (error) {
+
+        if (error.response.data.errors.old_slug) {
+            setShowOldSlugError(true)
+            setOldSlugError(error.response.data.errors.old_slug)
+        } else {
+            setShowOldSlugError(false)
+            setOldSlugError('')
+        }
+
+        if (error.response.data.errors.new_slug) {
+            setShowNewSlugError(true)
+            setNewSlugError(error.response.data.errors.new_slug)
+        } else {
+            setShowNewSlugError(false)
+            setNewSlugError('')
+        }
+
+        setSuccessMessage('')
+        setShowSuccessMessage(false)
+        setShortenedURL('')
+        setShowShortenedURL(false)
+    });
+}
+
+
 const analytics = (callback) => {
     axios({
         method: "get",
@@ -66,5 +100,6 @@ const analytics = (callback) => {
 export {
     shortenURL,
     expandURL,
+    customizeURL,
     analytics
 }
