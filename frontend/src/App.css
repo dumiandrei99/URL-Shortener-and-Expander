@@ -96,7 +96,8 @@ div.success {
 
 div.shortened-or-expanded-url {
     margin-top: 5vh;
-    width: 100%;
+    width: 60vw;
+    overflow-wrap: break-word;
     font-size: 18px;
     text-align: center;
 }
