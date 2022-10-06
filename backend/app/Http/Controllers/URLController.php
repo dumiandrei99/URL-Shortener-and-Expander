@@ -60,13 +60,13 @@ class URLController extends Controller
         $slug = $request->slug;
 
         // check if the slug is already defined and saved in the DB
-        if (!URL::where('slug', $slug)->exists()) {
+        if (!URL::whereRaw("BINARY `slug`= ?", [$slug])->exists()) {
             // status code 400 - Bad Request
             return response(["errors" => ["slug" => "This slug does not exist!"]], 400);
         };
 
         // get the object with the slug from the input from the DB
-        $url_object = URL::where('slug', $slug)->first();
+        $url_object = URL::whereRaw("BINARY `slug`= ?", [$slug])->first();
 
         // success response has a success message and the host/slug URL that is sent to the frontend
         $response = ["success" => [
@@ -74,6 +74,52 @@ class URLController extends Controller
             "url" => $url_object->expanded_url
         ]];
 
+        return response($response, 200);
+    }
+
+    /**
+     * Customizes a slug
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function customize(Request $request)
+    {
+        // validate the request
+        $request->validate([
+            'old_slug' => 'required',
+            'new_slug' => 'required'
+        ]);
+
+        // extract the request parameters
+        $old_slug = $request->old_slug;
+        // creates a random, 7 character slug, which is unique
+        $new_slug = $request->new_slug;
+
+        // check if the old slug exists in the DB and if not, return an error message
+        if (!URL::whereRaw("BINARY `slug`= ?", [$old_slug])->exists()) {
+            // status code 400 - Bad Request
+            return response(["errors" => ["slug" => "This slug does not exist!"]], 400);
+        };
+
+        // check if the new slug is already used by someone else
+        if (URL::whereRaw("BINARY `slug`= ?", [$new_slug])->exists()) {
+            // status code 400 - Bad Request
+            return response(["errors" => ["slug" => "This customized slug is already in use!"]], 400);
+        }
+
+        // save the new slug in the DB
+        $url_object = URL::whereRaw("BINARY `slug`= ?", [$old_slug])->first();
+        $url_object->slug = $new_slug;
+        $url_object->save();
+
+        // success response has a success message and the URL with the customized slug that is sent to the frontend
+        $host = url('/');
+        $url_response = $host . "/api/" . $new_slug;
+        $response = ["success" => [
+            "message" => "Your slug has been updated!",
+            "url" => $url_response
+        ]];
         return response($response, 200);
     }
 
